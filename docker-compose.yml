@@ -1,0 +1,24 @@
+version: "3.5"
+
+networks: 
+  todo-network:
+services:
+  api:
+    container_name: todo-api
+    build: 
+      context: ./todo-api
+    image: todo-api
+    networks: 
+      - todo-network
+  web:
+    container_name: todo-web
+    build: 
+      context: ./todo-webapp
+    image: todo-webapp
+    ports: 
+      - 80:80
+      - 443:443
+    links: 
+      - api
+    networks: 
+      - todo-network
